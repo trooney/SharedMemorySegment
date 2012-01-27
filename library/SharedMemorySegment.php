@@ -10,7 +10,8 @@
  * $shm->detach();                         // Detach segment
  * </code> 
  * 
- * @author Tyler Rooney <tyler@tylerrooney.ca>
+ * @author Tyler Rooney <tyler@tylerrooney.ca
+ * @copyright 2012 Tyler Rooney
  */
 class SharedMemorySegment {
     
@@ -55,7 +56,7 @@ class SharedMemorySegment {
         
         foreach (compact('shmKey', 'memorySize', 'permissions') as $param => $value) {
             if (!is_numeric($value)) {
-                throw new Exception("SharedMemorySegment::__construct() expects {$param} to be an interger");
+                throw new \InvalidArgumentException("SharedMemorySegment::__construct() expects {$param} to be an interger");
             }
         }
         

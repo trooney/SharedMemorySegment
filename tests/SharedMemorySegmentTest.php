@@ -5,10 +5,10 @@ require_once('../library/SharedMemorySegment.php');
 class SharedMemorySegmentTest extends PHPUnit_Framework_TestCase {
     
     /**
-     * @expectedException Exception
+     * @expectedException InvalidArgumentException
      */
     public function testConstructorBadparameters() {
-        $shm = new SharedMemorySegment('a');
+        $shm = new SharedMemorySegment('a', 'a', 'a');
     }
     
     public function testAttributeAccessors() {
