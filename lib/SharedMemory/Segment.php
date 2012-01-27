@@ -3,7 +3,7 @@
  * Simple wrapper for shared memory segments
  * 
  * <code>
- * $shm = new SharedMemorySegment('002');  // Create instance
+ * $shm = new Segment('002');  // Create instance
  * $shm->set('123', 'foo');                // Save something
  * $shm->get('123');                       // Retrieve something
  * $shm->clear();                          // Clear segment 
@@ -13,7 +13,10 @@
  * @author Tyler Rooney <tyler@tylerrooney.ca
  * @copyright 2012 Tyler Rooney
  */
-class SharedMemorySegment {
+
+namespace SharedMemory;
+
+class Segment {
     
     /**
      * Octal permissions for segment
@@ -64,11 +67,11 @@ class SharedMemorySegment {
         $this->_memorySize = (int) $memorySize;
         $this->_permissions = (int) $permissions;
         
-        if (is_null(SharedMemorySegment::$_SHM_HAS_VAR_FUNC_AVAILABLE)) {
+        if (is_null(Segment::$_SHM_HAS_VAR_FUNC_AVAILABLE)) {
             if (function_exists('shm_has_var')) {
-                SharedMemorySegment::$_SHM_HAS_VAR_FUNC_AVAILABLE = true;
+                Segment::$_SHM_HAS_VAR_FUNC_AVAILABLE = true;
             } else {
-                SharedMemorySegment::$_SHM_HAS_VAR_FUNC_AVAILABLE = false;
+                Segment::$_SHM_HAS_VAR_FUNC_AVAILABLE = false;
             }
         }
             
@@ -96,7 +99,7 @@ class SharedMemorySegment {
      * @return type 
      */
     public function exists($key) {
-        if (SharedMemorySegment::$_SHM_HAS_VAR_FUNC_AVAILABLE) {
+        if (Segment::$_SHM_HAS_VAR_FUNC_AVAILABLE) {
             return shm_has_var($this->segment(), $key);
         } else {
             return (@shm_get_var($this->segment(), $key) !== FALSE);
