@@ -1,6 +1,6 @@
 <?php
 
-require_once('../library/SharedMemorySegment.php');
+require_once('../lib/SharedMemorySegment.php');
 
 class SharedMemorySegmentTest extends PHPUnit_Framework_TestCase {
     
