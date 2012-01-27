@@ -56,13 +56,13 @@ class SharedMemorySegment {
         
         foreach (compact('shmKey', 'memorySize', 'permissions') as $param => $value) {
             if (!is_numeric($value)) {
-                throw new \InvalidArgumentException("SharedMemorySegment::__construct() expects {$param} to be an interger");
+                throw new \InvalidArgumentException(__CLASS__ . "::__construct() expects {$param} to be an interger");
             }
         }
         
-        $this->_shmKey = $shmKey;
-        $this->_memorySize = $memorySize;
-        $this->_permissions = $permissions;
+        $this->_shmKey = (int) $shmKey;
+        $this->_memorySize = (int) $memorySize;
+        $this->_permissions = (int) $permissions;
         
         if (is_null(SharedMemorySegment::$_SHM_HAS_VAR_FUNC_AVAILABLE)) {
             if (function_exists('shm_has_var')) {

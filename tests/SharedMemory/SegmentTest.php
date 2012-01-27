@@ -1,18 +1,18 @@
 <?php
 
-require_once('../lib/SharedMemorySegment.php');
+require_once('../../lib/SharedMemory/Segment.php');
 
-class SharedMemorySegmentTest extends PHPUnit_Framework_TestCase {
+class SegmentTest extends \PHPUnit_Framework_TestCase {
     
     /**
      * @expectedException InvalidArgumentException
      */
     public function testConstructorBadparameters() {
-        $shm = new SharedMemorySegment('a', 'a', 'a');
+        $shm = new Segment('a', 'a', 'a');
     }
     
     public function testAttributeAccessors() {
-        $shm = new SharedMemorySegment('001');
+        $shm = new Segment('001');
         $shm->clear();
         
         $expected = true;
@@ -24,7 +24,7 @@ class SharedMemorySegmentTest extends PHPUnit_Framework_TestCase {
     }
     
     public function testAttributeExists() {
-        $shm = new SharedMemorySegment('001');
+        $shm = new Segment('001');
         $shm->clear();
         
         $expected = false;
@@ -37,7 +37,7 @@ class SharedMemorySegmentTest extends PHPUnit_Framework_TestCase {
     }
     
     public function testAttributeDel() {
-        $shm = new SharedMemorySegment('001');
+        $shm = new Segment('001');
         $shm->clear();
         
         $shm->set('123', 'foo');
@@ -50,14 +50,14 @@ class SharedMemorySegmentTest extends PHPUnit_Framework_TestCase {
     }
     
     public function _testRemove() {
-        $shm = new SharedMemorySegment('002'); 
+        $shm = new Segment('002');
         $shm->clear();
         $shm->set('123', 'foo');
         
         $expected = true;
         $this->assertEquals($expected, $shm->remove());
         
-        $shm2 = new SharedMemorySegment('002'); 
+        $shm2 = new Segment('002');
         $expected = false;
         $this->assertEquals($expected, $shm->exists('123'));
     }
