@@ -82,7 +82,7 @@ class Segment {
      * @return boolean success
      */
     public function del($key) {
-        return shm_remove_var($this->segment(), $key);
+        return shm_remove_var($this->segment(), (int) $key);
     }
     
     /**
@@ -95,14 +95,14 @@ class Segment {
     /**
      *
      * @see SharedMemorySegment::$_SHM_HAS_VAR_FUNC_AVAILABLE
-     * @param type $key
+     * @param integer $key
      * @return type 
      */
     public function exists($key) {
         if (Segment::$_SHM_HAS_VAR_FUNC_AVAILABLE) {
-            return shm_has_var($this->segment(), $key);
+            return shm_has_var($this->segment(), (int) $key);
         } else {
-            return (@shm_get_var($this->segment(), $key) !== FALSE);
+            return (@shm_get_var($this->segment(), (int) $key) !== FALSE);
         }
     }
     
@@ -112,7 +112,7 @@ class Segment {
      * @return boolean
      */
     public function get($key) {
-        return shm_get_var($this->segment(), $key);
+        return shm_get_var($this->segment(), (int) $key);
     }
     
     /**
@@ -133,7 +133,7 @@ class Segment {
      * @return boolean
      */
     public function set($key, $val) {
-        return shm_put_var($this->segment(), $key, $val);
+        return shm_put_var($this->segment(), (int) $key, $val);
     }
     
     /**
